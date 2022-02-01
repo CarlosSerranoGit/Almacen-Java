@@ -1,4 +1,6 @@
-package model;
+package interfaces;
+
+import model.DrinkType;
 
 public interface IStore {
 	boolean addDrink(IDrink drink);

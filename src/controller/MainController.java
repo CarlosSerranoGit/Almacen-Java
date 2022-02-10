@@ -4,11 +4,14 @@ import interfaces.IDrink;
 import interfaces.IMainController;
 import interfaces.IStore;
 import interfaces.IView;
+import model.Alcoholic;
+import model.Soda;
+import model.Store;
 import view.View;
 
 public class MainController implements IMainController{
-	IView view;
-	IStore store;
+	IView view= new View();
+	IStore store =new Store();
 	@Override
 	public void run() {
 		int option=-1;
@@ -31,6 +34,7 @@ public class MainController implements IMainController{
 	 * del menú principal
 	 */
 	private void switchMain(int option) {
+		/**/
 		switch(option) {
 			case 1: boolean result=addDrink();
 					if(result) {
@@ -43,13 +47,22 @@ public class MainController implements IMainController{
 					view.print("Inserte el nombre de la bebida");
 					String name=view.leeString();
 					IDrink d=searchDrink(name);
-					view.print(d);
+					if(d==null) {
+						view.print("La bebida no existe");
+					}else {
+						view.print(d);
+					}
+					
 					break;
 			case 3: 
 					view.print("Inserte el nombre de la bebida");
 					String name2=view.leeString();
 					IDrink d2=getDrink(name2);
-					view.print(d2);
+					if(d2==null) {
+						view.print("Bebida no encontrada");
+					}else {
+						view.print(d2);
+					}
 					break;
 			case 4:
 					//IDrink drink <---
@@ -59,7 +72,7 @@ public class MainController implements IMainController{
 					break;
 			case 6: view.print("Hasta la próxima");
 					break;
-			default: view.print("Opción incorrecta")
+			default: view.print("Opción incorrecta");
 					
 		}
 	}
@@ -79,9 +92,9 @@ public class MainController implements IMainController{
 		int tipo=view.leeEntero();
 		IDrink newDrink=null;
 		if(tipo==1) {
-		//	newDrink=new Alcoholic(name,precio);
+			newDrink=new Alcoholic(precio,name);
 		}else {
-		//	newDrink=new Soda(name,precio);
+			newDrink=new Soda(precio,name);
 		}
 		
 		return store.addDrink(newDrink);
@@ -92,7 +105,7 @@ public class MainController implements IMainController{
 	 * @return la bebida o null en caso de no existir
 	 */
 	private IDrink searchDrink(String name) {
-		return null;
+		return store.searchDrink(name);
 	}
 	/**
 	 * Busca, devuelve y elimina del almacen la bebida dada
@@ -101,7 +114,7 @@ public class MainController implements IMainController{
 	 * @return la bebida o null en caso de no existir
 	 */
 	private IDrink getDrink(String name) {
-		return null;
+		return store.getDrink(name);
 	}
 	/**
 	 * Actualiza la bebida con lo nuevos datos insertados

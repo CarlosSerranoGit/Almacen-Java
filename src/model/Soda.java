@@ -2,46 +2,19 @@ package model;
 
 import interfaces.IDrink;
 
-public class Soda implements IDrink{
-	private Float price;
-	private String name;
-	
+public class Soda extends Drink{
 	public Soda() {
-		this(0f,"");
+		super();
 	}
-	public Soda(Float price, String name) {
-		this.price = price;
-		this.name = name;
+	public Soda(Float price,String name) {
+		super(price,name);
 	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return name;
-	}
-
 	@Override
 	public Float getPrice() {
 		// TODO Auto-generated method stub
-		return price;
+		return this.price*1.10f;
 	}
 
-	@Override
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-		this.name=name;
-		
-	}
 
-	@Override
-	public void setPrice(Float price) {
-		// TODO Auto-generated method stub
-		this.price=price;
-		
-	}
-	@Override
-	public String toString() {
-		return "Soda [price=" + price + ", name=" + name + "]";
-	}
 	
 }

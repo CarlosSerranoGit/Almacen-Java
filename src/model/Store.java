@@ -1,9 +1,11 @@
 package model;
 
+import java.util.Arrays;
+
 import interfaces.IDrink;
 import interfaces.IStore;
 
-public class Store implements IStore{
+public class Store implements IStore,Cloneable{
 	private IDrink[][] drinks;
 	
 	public Store() {
@@ -82,6 +84,14 @@ public class Store implements IStore{
 	public Integer howMany(DrinkType type) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		Store copia= (Store)super.clone();
+		copia.drinks=Arrays.copyOf(this.drinks, this.drinks.length);
+		return (Object)copia;
 	}
 
 }
